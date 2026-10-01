@@ -1,0 +1,60 @@
+{
+  "clientCode": "acme",
+  "environment": "prod",
+  "description": "production",
+  "region": "us-east-1",
+  "domain": "example.com",
+  "certificateArn": "arn:aws:acm:us-east-1:111122223333:certificate/00000000-0000-0000-0000-000000000000",
+  "cidrEnvironments": "172.25.0.0/16",
+  "cidrDatabase": "10.25.0.0/16",
+  "database": {
+    "username": "acmeAdmin",
+    "instanceType": "m6g.large",
+    "multiAz": true,
+    "allocatedStorage": 20,
+    "maxAllocatedStorage": 100
+  },
+  "cache": {
+    "enabled": true,
+    "engineVersion": "8.0",
+    "parameterFamily": "valkey8",
+    "nodeType": "cache.t3.micro"
+  },
+  "services": [
+    {
+      "name": "sales",
+      "albType": "public",
+      "subdomain": "sales",
+      "port": 80,
+      "cpu": 512,
+      "memoryLimitMiB": 1024,
+      "desiredCount": 2,
+      "priority": 10,
+      "healthCheckPath": "/",
+      "autoscaling": { "min": 2, "max": 6, "cpuTarget": 70, "memoryTarget": 75 }
+    },
+    {
+      "name": "agents",
+      "albType": "public",
+      "subdomain": "agents",
+      "port": 80,
+      "cpu": 512,
+      "memoryLimitMiB": 1024,
+      "desiredCount": 2,
+      "priority": 20,
+      "healthCheckPath": "/",
+      "autoscaling": { "min": 2, "max": 4 }
+    },
+    {
+      "name": "middleware",
+      "albType": "internal",
+      "subdomain": "middleware",
+      "port": 80,
+      "cpu": 1024,
+      "memoryLimitMiB": 2048,
+      "desiredCount": 2,
+      "priority": 10,
+      "healthCheckPath": "/health"
+    }
+  ]
+}

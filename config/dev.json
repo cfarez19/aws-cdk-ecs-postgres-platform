@@ -1,0 +1,58 @@
+{
+  "clientCode": "acme",
+  "environment": "dev",
+  "description": "development",
+  "region": "us-east-1",
+  "domain": "example.com",
+  "certificateArn": "arn:aws:acm:us-east-1:111122223333:certificate/00000000-0000-0000-0000-000000000000",
+  "cidrEnvironments": "172.24.0.0/16",
+  "cidrDatabase": "10.24.0.0/16",
+  "database": {
+    "username": "acmeAdmin",
+    "instanceType": "t3.medium",
+    "multiAz": false,
+    "allocatedStorage": 20,
+    "maxAllocatedStorage": 100
+  },
+  "cache": {
+    "enabled": false,
+    "engineVersion": "8.0",
+    "parameterFamily": "valkey8",
+    "nodeType": "cache.t3.micro"
+  },
+  "services": [
+    {
+      "name": "sales",
+      "albType": "public",
+      "subdomain": "sales",
+      "port": 80,
+      "cpu": 256,
+      "memoryLimitMiB": 512,
+      "desiredCount": 1,
+      "priority": 10,
+      "healthCheckPath": "/"
+    },
+    {
+      "name": "agents",
+      "albType": "public",
+      "subdomain": "agents",
+      "port": 80,
+      "cpu": 256,
+      "memoryLimitMiB": 512,
+      "desiredCount": 1,
+      "priority": 20,
+      "healthCheckPath": "/"
+    },
+    {
+      "name": "middleware",
+      "albType": "internal",
+      "subdomain": "middleware",
+      "port": 80,
+      "cpu": 256,
+      "memoryLimitMiB": 512,
+      "desiredCount": 1,
+      "priority": 10,
+      "healthCheckPath": "/health"
+    }
+  ]
+}
