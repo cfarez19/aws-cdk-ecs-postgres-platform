@@ -2,7 +2,7 @@
 
 A config-driven AWS platform in **AWS CDK (JavaScript)** for containerized web apps: ECS Fargate services behind public and internal load balancers, **RDS PostgreSQL 17** with automatically rotated users, and a **Valkey** (Redis-compatible) cache, with all data kept in an isolated VPC.
 
-It is a sanitized version of infrastructure I built for an insurance SaaS (online sales, agent portal and integration middleware). The same service-list pattern also powered an ECS template I used across 15 client environments when moving workloads from Elastic Beanstalk to Fargate. Client names, account IDs and domains have been replaced with placeholders.
+I use this architecture for SaaS products with several web apps and an integration middleware, such as online sales and agent portals for insurers. The same service-list pattern is what I use to move workloads from Elastic Beanstalk to Fargate across many client environments.
 
 ![CDK](https://img.shields.io/badge/AWS%20CDK-v2-orange) ![PostgreSQL](https://img.shields.io/badge/RDS-PostgreSQL%2017-blue) ![Valkey](https://img.shields.io/badge/cache-Valkey%208-red) ![Tests](https://img.shields.io/badge/tests-jest-green)
 
